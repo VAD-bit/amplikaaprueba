@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { FAQS } from "@/lib/config";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHead } from "@/components/home/section-head";
@@ -7,22 +10,10 @@ export function Faq() {
   return (
     <section id="faq" className="relative border-t-2 border-ink py-24 sm:py-32" aria-labelledby="tit-faq">
       <div className="mx-auto max-w-4xl px-5 sm:px-8">
-        <SectionHead
-          id="tit-faq"
-          no="09"
-          kicker="Cartas al director"
-          title={
-            <>
-              Resolvemos<br />
-              <span className="text-gradient italic">tus dudas</span>
-            </>
-          }
-          deck="Las preguntas que más llegan a la redacción, respondidas sin vueltas."
-          align="center"
-        />
+        <SectionHead id="tit-faq" no="09" kicker="Cartas al director" title={<>Resolvemos<span className="text-gradient italic">tus dudas</span></>} deck="Las preguntas que más llegan a la redacción, respondidas sin vueltas." align="center" />
 
-        <Reveal>
-          <div className="glass p-5 sm:p-7">
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.6 }} className="glass p-5 sm:p-7 backdrop-blur-sm">
+          <Reveal>
             <Accordion type="single" collapsible defaultValue="item-0">
               {FAQS.map((f, i) => (
                 <AccordionItem key={f.q} value={`item-${i}`}>
@@ -31,8 +22,8 @@ export function Faq() {
                 </AccordionItem>
               ))}
             </Accordion>
-          </div>
-        </Reveal>
+          </Reveal>
+        </motion.div>
       </div>
     </section>
   );

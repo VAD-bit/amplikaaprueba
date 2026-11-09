@@ -123,40 +123,47 @@ export function Hero() {
           </div>
 
           <aside className="lg:col-span-4" aria-label="En esta edición">
-            <Reveal delay={0.2}>
-              <div className="glass relative p-6">
-                <span className="tape -top-3 left-8 -rotate-3" aria-hidden="true" />
-                <p className="label-mono mb-4 border-b border-ink/25 pb-3">En esta edición</p>
-                <ol className="space-y-0">
-                  {INDEX_ANCHORS.map((item, i) => (
-                    <li key={item.href} className="border-b border-dashed border-ink/20 last:border-0">
-                      <a
-                        href={item.href}
-                        className="group flex cursor-pointer items-baseline gap-3 py-3 transition-colors hover:underline hover:underline-offset-4"
-                      >
-                        <span className="font-mono text-[11px] text-ink-mute">{String(i + 1).padStart(2, "0")}</span>
-                        <span className="font-syne text-[15px] font-semibold leading-tight">{item.label}</span>
-                        <span className="ml-auto font-mono text-xs text-ink-mute transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-                <div className="mt-5 flex items-center gap-3 border-t border-ink/25 pt-4">
-                  <span className="pulse-dot h-2 w-2 shrink-0 rounded-full bg-elec" aria-hidden="true" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
-                    Disponible para nuevos proyectos · {BRAND.year}
-                  </span>
-                </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="glass relative p-6 backdrop-blur-md border border-ink/20"
+            >
+              <span className="tape -top-3 left-8 -rotate-3" aria-hidden="true" />
+              <p className="label-mono mb-4 border-b border-ink/25 pb-3">En esta edición</p>
+              <ol className="space-y-0">
+                {INDEX_ANCHORS.map((item, i) => (
+                  <li key={item.href} className="border-b border-dashed border-ink/20 last:border-0">
+                    <a
+                      href={item.href}
+                      className="group flex cursor-pointer items-baseline gap-3 py-3 transition-colors hover:underline hover:underline-offset-4"
+                    >
+                      <span className="font-mono text-[11px] text-ink-mute">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="font-syne text-[15px] font-semibold leading-tight">{item.label}</span>
+                      <span className="ml-auto font-mono text-xs text-ink-mute transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+              <div className="mt-5 flex items-center gap-3 border-t border-ink/25 pt-4">
+                <span className="pulse-dot h-2 w-2 shrink-0 rounded-full bg-elec" aria-hidden="true" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
+                  Disponible para nuevos proyectos · {BRAND.year}
+                </span>
               </div>
-            </Reveal>
+            </motion.div>
 
             <Reveal delay={0.26}>
-              <div className="sticker mt-8 inline-block rotate-[-3deg] bg-mark px-5 py-3 text-center">
+              <motion.div
+                whileHover={{ rotate: -2 }}
+                className="sticker mt-8 inline-block rotate-[-3deg] bg-mark px-5 py-3 text-center cursor-default"
+              >
                 <p className="font-syne text-lg font-bold uppercase leading-none">Precio cerrado</p>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
                   Sin intermediarios
                 </p>
-              </div>
+              </motion.div>
             </Reveal>
           </aside>
         </div>

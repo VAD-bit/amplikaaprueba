@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Globe, Video, Code2, Palette, TrendingUp, MessageSquare } from "lucide-react";
 import { SERVICES, type ServiceIcon } from "@/lib/config";
 import { Reveal } from "@/components/motion/reveal";
@@ -13,6 +14,11 @@ const ICONS: Record<ServiceIcon, typeof Globe> = {
   palette: Palette,
   trending: TrendingUp,
   message: MessageSquare,
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 14 } },
 };
 
 export function Services() {
@@ -35,42 +41,46 @@ export function Services() {
         />
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s, i) => {
-            const Icon = ICONS[s.icon];
-            const viol = s.accent === "viol";
+          {SERVICES.map((service, index) => {
+            const Icon = ICONS[service.icon];
             return (
-              <Reveal key={s.index} delay={i * 0.06}>
-                <article
-                  className={cn(
-                    "group glass relative h-full cursor-default p-7 transition-all duration-300",
-                    viol ? "hover:-translate-y-1 hover:shadow-[6px_6px_0_rgba(11,10,8,0.85)]" : "hover:-translate-y-1 hover:shadow-[6px_6px_0_rgba(11,10,8,0.85)]"
-                  )}
-                >
-                  <div className="mb-6 flex items-start justify-between border-b border-ink/20 pb-4">
-                    <span
-                      className={cn(
-                        "grid h-11 w-11 place-items-center border border-ink/25 bg-paper-3/70",
-                        viol ? "text-ink" : "text-ink"
-                      )}
-                    >
-                      <Icon size={22} strokeWidth={1.6} aria-hidden="true" />
-                    </span>
-                    <span className="font-mono text-xs text-ink-mute">{s.index}</span>
-                  </div>
-                  <h3 className="headline mb-3 text-xl uppercase">{s.title}</h3>
-                  <p className="mb-5 text-sm leading-relaxed text-ink-soft">{s.desc}</p>
-                  <ul className="flex flex-wrap gap-2">
-                    {s.tags.map((t) => (
-                      <li
-                        key={t}
-                        className="border border-ink/25 bg-paper-3/60 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ink-soft"
+              <motion.div
+                key={service.index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: index * 0.05 }}
+                className="h-full"
+              >
+                <Reveal key={service.index} delay={index * 0.05}>
+                  <article
+                    className={cn(
+                      "group glass relative h-full cursor-pointer border border-ink/25 bg-paper-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0_rgba(11,10,8,0.85)] backdrop-blur-sm"
+                    )}
+                  >
+                    <div className="mb-6 flex items-start justify-between border-b border-ink/20 pb-4">
+                      <span
+                        className={cn(
+                          "grid h-11 w-11 place-items-center border border-ink/25 bg-paper-3/70 text-ink"
+                        )}
                       >
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </Reveal>
+                        <Icon size={22} strokeWidth={1.6} aria-hidden="true" />
+                      </span>
+                      <span className="font-mono text-xs text-ink-mute">{service.index}</span>
+                    </div>
+                    <h3 className="headline text-xl uppercase">{service.title}</h3>
+                    <p className="mb-5 text-sm leading-relaxed text-ink-soft">{service.desc}</p>
+                    <ul className="flex flex-wrap gap-2">
+                      {service.tags.map((t) => (
+                        <li key={t} className="border border-ink/25 bg-paper-3/60 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-ink-soft">
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                </Reveal>
+              </motion.div>
             );
           })}
         </div>

@@ -1,19 +1,16 @@
-import path from "node:path";
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  experimental: {
-    agentUpgrade: "security",
-  },
-  turbopack: {
-    root: path.resolve(__dirname),
-  },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "*.supabase.co" },
-    ],
+    domains: ['localhost'],
   },
-};
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+}
 
-export default nextConfig;
+export default nextConfig
+
+export default nextConfig

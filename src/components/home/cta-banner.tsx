@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
@@ -13,7 +15,7 @@ export function CtaBanner() {
           </p>
           <p className="headline text-[clamp(2rem,5vw,3.4rem)] uppercase text-ink">
             Tu marca merece un<br />
-            <span className="italic">ecosistema a su altura</span>
+            <span className="text-gradient italic">ecosistema a su altura</span>
           </p>
         </Reveal>
         <Reveal delay={0.1} className="mt-9 flex flex-wrap justify-center gap-4">

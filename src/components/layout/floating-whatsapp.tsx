@@ -1,31 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { WaIcon } from "@/components/icons/wa-icon";
-import { WA_DEFAULT } from "@/lib/config";
+import { CONTACT } from "@/lib/config";
 
 export function FloatingWhatsapp() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 600);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <a
-      href={WA_DEFAULT}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Escribir por WhatsApp"
-      className={
-        "glow-elec fixed right-6 bottom-6 z-50 grid h-14 w-14 cursor-pointer place-items-center rounded-full glass-strong text-ink transition-all duration-300 hover:bg-elec " +
-        (show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0")
-      }
-    >
-      <WaIcon className="h-6 w-6" />
-    </a>
+    <div className="fixed bottom-6 right-6 z-50">
+      <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-elec flex items-center justify-center shadow-[4px_4px_0_rgba(11,10,8,0.85)] hover:shadow-[6px_6px_0_rgba(11,10,8,0.9)] transition-all">
+        <WaIcon className="h-7 w-7 text-ink" />
+      </a>
+    </div>
   );
 }

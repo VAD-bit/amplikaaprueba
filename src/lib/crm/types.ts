@@ -50,6 +50,7 @@ export interface ClientRow {
   id: string;
   created_at: string;
   updated_at: string;
+  slug: string | null;
   nombre: string;
   empresa: string | null;
   whatsapp: string | null;

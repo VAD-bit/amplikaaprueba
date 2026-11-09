@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Libre_Bodoni, Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
 
+import { ThemeProvider } from "@/components/providers/theme-provider";
+
 const syne = Libre_Bodoni({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -25,13 +27,11 @@ const mono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AMPLIKAA — Agencia de Marketing Digital | Web, Sistemas y Campañas",
-  description:
-    "AMPLIKAA es una agencia de marketing digital en Maracay, Venezuela. Catálogo de webs y sistemas, clientes con campañas activas, y planes de marketing y desarrollo.",
+  title: "Amplikaa — Agencia de Marketing Digital | Web, Sistemas y Campañas",
+  description: "Amplikaa es una agencia de marketing digital en Maracay, Venezuela. Catálogo de webs y sistemas, clientes con campañas activas, y planes de marketing y desarrollo.",
   openGraph: {
-    title: "AMPLIKAA — Agencia de Marketing Digital",
-    description:
-      "Web, sistemas, campañas y producción. El periódico completo de la agencia desde Maracay, Venezuela.",
+    title: "Amplikaa — Agencia de Marketing Digital",
+    description: "Web, sistemas, campañas y producción. El periódico completo de la agencia desde Maracay, Venezuela.",
     type: "website",
   },
   metadataBase: new URL("https://amplikaa.com"),
@@ -40,7 +40,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${syne.variable} ${grotesk.variable} ${mono.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { METRICS, SECTORS } from "@/lib/config";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -63,14 +63,19 @@ export function MetricsMarquee() {
         </Reveal>
         <dl className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {METRICS.map((m, i) => (
-            <Reveal key={m.label} delay={i * 0.06}>
-              <div className="metric-card h-full px-5 py-6">
-                <dt className="font-mono text-[10px] uppercase tracking-[0.24em] text-ink-mute">{m.label}</dt>
-                <dd className="headline mt-2 text-3xl sm:text-4xl">
-                  <Counter target={m.target} prefix={"prefix" in m ? m.prefix : ""} suffix={m.suffix} />
-                </dd>
-              </div>
-            </Reveal>
+            <motion.div
+              key={m.label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: i * 0.05, duration: 0.5 }}
+              className="metric-card h-full glass p-5 sm:px-5 sm:py-6 backdrop-blur-sm border border-ink/20"
+            >
+              <dt className="font-mono text-[10px] uppercase tracking-[0.24em] text-ink-mute">{m.label}</dt>
+              <dd className="headline mt-2 text-3xl sm:text-4xl">
+                <Counter target={m.target} prefix={"prefix" in m ? m.prefix : ""} suffix={m.suffix} />
+              </dd>
+            </motion.div>
           ))}
         </dl>
       </section>

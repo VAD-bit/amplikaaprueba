@@ -6,6 +6,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { NAV_LINKS, EDITION } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/providers/theme-provider";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -85,6 +86,7 @@ export function Navbar() {
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
+          <ThemeToggle />
         </div>
       </div>
 
